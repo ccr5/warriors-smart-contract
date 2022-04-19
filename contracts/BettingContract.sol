@@ -119,6 +119,15 @@ contract Betting is IBetting, IBettingMetadata {
         return _teams[teamId_];
     }
 
+    function bets(uint256 teamId_)
+        external
+        view
+        override
+        returns (address[] memory)
+    {
+        return _bets[teamId_];
+    }
+
     function addTeam(string memory name_) private {
         _teamsCount++;
         _teams[_teamsCount] = Team(_teamsCount, name_, 0, 0);

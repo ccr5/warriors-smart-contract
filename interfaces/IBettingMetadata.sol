@@ -16,4 +16,6 @@ interface IBettingMetadata {
     function endBlock() external view returns (uint256);
 
     function teams(uint256 teamId_) external view returns (Team memory);
+
+    function bets(uint256 teamId_) external view returns (address[] memory);
 }

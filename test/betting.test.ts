@@ -49,7 +49,7 @@ describe("When Betting is deployed", function () {
   });
 
   it("allows a voter to cast a vote", async () => {
-    const [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
+    const [owner, addr1] = await ethers.getSigners();
 
     const AToken = await ethers.getContractFactory("BettingToken");
     const bet = await AToken.deploy(1000000);
@@ -59,29 +59,33 @@ describe("When Betting is deployed", function () {
     const betting = await Betting.deploy(betAddress);
     const instance = await betting._deployed();
 
-    // Transfer funds to a account
     await bet.transfer(addr1.address, 1000);
-
-    // approved Betting contract to him
     await bet.connect(addr1).approve(instance.address, 1000);
-
-    // call bet function
     await instance.connect(addr1).bet(1, 1000);
 
-    // check if it happened
     const team = await instance.teams(1);
     expect(team.bets).to.equal(1);
     expect(team.tokens).to.equal(1000);
-    expect(await betting.totalBetted()).to.equal(1000);
+    expect(await instance.totalBetted()).to.equal(1000);
+    const result = await instance.bets(1);
+    expect(result.length).to.equal(1);
   });
 
-  // it("emits a Betted event", async () => {
-  //   const Brasileirao = await ethers.getContractFactory("Brasileirao");
-  //   const accounts = await ethers.getSigners();
-  //   const brasileirao = await Brasileirao.deploy();
-  //   const instance = await brasileirao._deployed();
-  //   await instance.bet(1, { from: await accounts[0].address });
-  //   const bettedEvents = await brasileirao.filters.Betted(1);
-  //   expect(bettedEvents.topics?.length).to.equal(2);
-  // });
+  it("emits a Betted event", async () => {
+    const [owner, addr1] = await ethers.getSigners();
+
+    const AToken = await ethers.getContractFactory("BettingToken");
+    const bet = await AToken.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress);
+    const instance = await betting._deployed();
+
+    await bet.transfer(addr1.address, 1000);
+    await bet.connect(addr1).approve(instance.address, 1000);
+    await instance.connect(addr1).bet(1, 1000);
+    const bettedEvents = instance.filters.Betted(1);
+    expect(bettedEvents.topics?.length).to.equal(2);
+  });
 });
