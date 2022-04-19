@@ -48,15 +48,32 @@ describe("When Betting is deployed", function () {
     expect(await fourthTeam.bets).to.equal(0);
   });
 
-  // it("allows a voter to cast a vote", async () => {
-  //   const Brasileirao = await ethers.getContractFactory("Brasileirao");
-  //   const accounts = await ethers.getSigners();
-  //   const brasileirao = await Brasileirao.deploy();
-  //   const instance = await brasileirao._deployed();
-  //   await instance.bet(1, { from: await accounts[0].address });
-  //   const bet = await instance.teams(1);
-  //   expect(bet.bets).to.equal(1);
-  // });
+  it("allows a voter to cast a vote", async () => {
+    const [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
+
+    const AToken = await ethers.getContractFactory("BettingToken");
+    const bet = await AToken.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress);
+    const instance = await betting._deployed();
+
+    // Transfer funds to a account
+    await bet.transfer(addr1.address, 1000);
+
+    // approved Betting contract to him
+    await bet.connect(addr1).approve(instance.address, 1000);
+
+    // call bet function
+    await instance.connect(addr1).bet(1, 1000);
+
+    // check if it happened
+    const team = await instance.teams(1);
+    expect(team.bets).to.equal(1);
+    expect(team.tokens).to.equal(1000);
+    expect(await betting.totalBetted()).to.equal(1000);
+  });
 
   // it("emits a Betted event", async () => {
   //   const Brasileirao = await ethers.getContractFactory("Brasileirao");
