@@ -7,8 +7,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
     expect(await instance.teamsCount()).to.equal(4);
   });
@@ -18,8 +19,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
 
     const firstTeam = await instance.teams(1);
@@ -48,6 +50,31 @@ describe("When Betting is deployed", function () {
     expect(await fourthTeam.bets).to.equal(0);
   });
 
+  it("initialize with an end block", async () => {
+    const Bet = await ethers.getContractFactory("BettingToken");
+    const bet = await Bet.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const endBlock = 100;
+    const currentBlock = await ethers.provider.getBlockNumber();
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress, endBlock);
+    const instance = await betting._deployed();
+    expect(await instance.endBlock()).to.equal(currentBlock + 100 + 1);
+  });
+
+  it("allows users to check how many time left", async () => {
+    const Bet = await ethers.getContractFactory("BettingToken");
+    const bet = await Bet.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const endBlock = 100;
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress, endBlock);
+    const instance = await betting._deployed();
+    expect(await instance.timer()).to.equal(100);
+  });
+
   it("allows a non better to bet in a team", async () => {
     const [owner, addr1] = await ethers.getSigners();
 
@@ -55,8 +82,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
 
     await bet.transfer(addr1.address, 1000);
@@ -78,8 +106,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
 
     await bet.transfer(addr1.address, 1000);
@@ -96,8 +125,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
 
     await bet.transfer(addr1.address, 1000);
@@ -120,8 +150,9 @@ describe("When Betting is deployed", function () {
     const bet = await Bet.deploy(1000000);
     const betAddress = await bet.address;
 
+    const endBlock = 100;
     const Betting = await ethers.getContractFactory("Betting");
-    const betting = await Betting.deploy(betAddress);
+    const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
 
     await bet.transfer(addr1.address, 1000);

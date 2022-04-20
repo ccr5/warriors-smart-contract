@@ -49,13 +49,14 @@ contract Betting is IBetting, IBettingMetadata {
         _;
     }
 
-    constructor(BettingToken token_) {
+    constructor(BettingToken token_, uint256 endBlock_) {
         addTeam("Sao Paulo");
         addTeam("Corinthians");
         addTeam("Santos");
         addTeam("Palmeiras");
         _organizer = msg.sender;
         _token = token_;
+        _endBlock = block.number + endBlock_;
     }
 
     /**
@@ -117,6 +118,13 @@ contract Betting is IBetting, IBettingMetadata {
         }
 
         return true;
+    }
+
+    /**
+     * See IBetting Interface (timer function)
+     */
+    function timer() external view override returns (uint256 time) {
+        return _endBlock - block.number;
     }
 
     /**

@@ -30,4 +30,9 @@ interface IBetting {
     /// @dev only organizer can call this function. Emits Ended event
     /// @return success boolean
     function end(uint256 winner_) external returns (bool success);
+
+    /// @notice Get how many blocks left to end
+    /// @dev only organizer can call this function. Emits Ended event
+    /// @return time number of blocks
+    function timer() external view returns (uint256 time);
 }
