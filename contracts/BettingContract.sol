@@ -49,6 +49,11 @@ contract Betting is IBetting, IBettingMetadata {
         _;
     }
 
+    modifier notFinished() {
+        require(block.number <= _endBlock, "Time not over yet");
+        _;
+    }
+
     constructor(BettingToken token_, uint256 endBlock_) {
         addTeam("Sao Paulo");
         addTeam("Corinthians");
@@ -68,6 +73,7 @@ contract Betting is IBetting, IBettingMetadata {
         onlyValidTeam(teamId_)
         isApproved(amount_)
         nonBetter
+        notFinished
         returns (bool success)
     {
         _token.transferFrom(msg.sender, address(this), amount_);
@@ -89,11 +95,11 @@ contract Betting is IBetting, IBettingMetadata {
         onlyValidTeam(_teamBetted[msg.sender])
         isApproved(amount_)
         better
+        notFinished
         returns (bool success)
     {
         uint256 teamId = _teamBetted[msg.sender];
         _token.transferFrom(msg.sender, address(this), amount_);
-        _teams[teamId].bets++;
         _teams[teamId].tokens += amount_;
         _totalBetted += amount_;
         emit Raised(teamId);
@@ -106,16 +112,19 @@ contract Betting is IBetting, IBettingMetadata {
     function end(uint256 winner_)
         external
         override
+        onlyValidTeam(winner_)
         onlyOrganizer
         returns (bool success)
     {
-        require(block.number >= _endBlock, "Time not over yet");
+        require(block.number > _endBlock, "Time not over yet");
 
-        uint256 fracAmount = _teams[winner_].tokens / _teams[winner_].bets;
+        uint256 fracAmount = _totalBetted / _teams[winner_].bets;
 
-        for (uint256 teamId = 0; teamId < _bets[winner_].length; teamId++) {
-            _token.transfer(_bets[winner_][teamId], fracAmount);
+        for (uint256 index = 0; index < _bets[winner_].length; index++) {
+            _token.transfer(_bets[winner_][index], fracAmount);
         }
+
+        emit Ended(winner_);
 
         return true;
     }

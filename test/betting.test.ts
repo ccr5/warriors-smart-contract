@@ -136,7 +136,7 @@ describe("When Betting is deployed", function () {
     await instance.connect(addr1).raise(900);
 
     const team = await instance.teams(1);
-    expect(team.bets).to.equal(2);
+    expect(team.bets).to.equal(1);
     expect(team.tokens).to.equal(1000);
     expect(await instance.totalBetted()).to.equal(1000);
     const result = await instance.bets(1);
@@ -159,6 +159,69 @@ describe("When Betting is deployed", function () {
     await bet.connect(addr1).approve(instance.address, 1000);
     await instance.connect(addr1).bet(1, 100);
     await instance.connect(addr1).raise(900);
+    const bettedEvents = instance.filters.Raised(1);
+    expect(bettedEvents.topics?.length).to.equal(2);
+  });
+
+  it("allows the organizer end the championship", async () => {
+    const [owner, addr1, addr2, addr3] = await ethers.getSigners();
+
+    const Bet = await ethers.getContractFactory("BettingToken");
+    const bet = await Bet.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const endBlock = 10;
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress, endBlock);
+    const instance = await betting._deployed();
+
+    await bet.transfer(addr1.address, 1000);
+    await bet.transfer(addr2.address, 1000);
+    await bet.transfer(addr3.address, 1000);
+
+    await bet.connect(addr1).approve(instance.address, 1000);
+    await bet.connect(addr2).approve(instance.address, 1000);
+    await bet.connect(addr3).approve(instance.address, 1000);
+
+    await instance.connect(addr1).bet(1, 100);
+    await instance.connect(addr1).raise(900);
+    await instance.connect(addr2).bet(1, 1000);
+    await instance.connect(addr3).bet(2, 1000);
+
+    await instance.end(1);
+
+    expect(await bet.balanceOf(addr1.address)).to.equal(1500);
+    expect(await bet.balanceOf(addr2.address)).to.equal(1500);
+    expect(await bet.balanceOf(addr3.address)).to.equal(0);
+  });
+
+  it("emits a Ended event", async () => {
+    const [owner, addr1, addr2, addr3] = await ethers.getSigners();
+
+    const Bet = await ethers.getContractFactory("BettingToken");
+    const bet = await Bet.deploy(1000000);
+    const betAddress = await bet.address;
+
+    const endBlock = 10;
+    const Betting = await ethers.getContractFactory("Betting");
+    const betting = await Betting.deploy(betAddress, endBlock);
+    const instance = await betting._deployed();
+
+    await bet.transfer(addr1.address, 1000);
+    await bet.transfer(addr2.address, 1000);
+    await bet.transfer(addr3.address, 1000);
+
+    await bet.connect(addr1).approve(instance.address, 1000);
+    await bet.connect(addr2).approve(instance.address, 1000);
+    await bet.connect(addr3).approve(instance.address, 1000);
+
+    await instance.connect(addr1).bet(1, 100);
+    await instance.connect(addr1).raise(900);
+    await instance.connect(addr2).bet(1, 1000);
+    await instance.connect(addr3).bet(2, 1000);
+
+    await instance.end(1);
+
     const bettedEvents = instance.filters.Raised(1);
     expect(bettedEvents.topics?.length).to.equal(2);
   });
