@@ -16,6 +16,7 @@ contract Betting is IBetting, IBettingMetadata {
     uint256 private _endBlock;
 
     mapping(uint256 => Team) private _teams;
+    mapping(address => uint256) private _teamBetted;
     mapping(uint256 => address[]) private _bets;
 
     modifier onlyOrganizer() {
@@ -38,6 +39,16 @@ contract Betting is IBetting, IBettingMetadata {
         _;
     }
 
+    modifier better() {
+        require(_teamBetted[msg.sender] != 0, "Account must to be a better");
+        _;
+    }
+
+    modifier nonBetter() {
+        require(_teamBetted[msg.sender] == 0, "Account must to be non Better");
+        _;
+    }
+
     constructor(BettingToken token_) {
         addTeam("Sao Paulo");
         addTeam("Corinthians");
@@ -55,14 +66,36 @@ contract Betting is IBetting, IBettingMetadata {
         override
         onlyValidTeam(teamId_)
         isApproved(amount_)
+        nonBetter
         returns (bool success)
     {
         _token.transferFrom(msg.sender, address(this), amount_);
         _teams[teamId_].bets++;
         _teams[teamId_].tokens += amount_;
         _bets[teamId_].push(msg.sender);
+        _teamBetted[msg.sender] = teamId_;
         _totalBetted += amount_;
         emit Betted(teamId_);
+        return true;
+    }
+
+    /**
+     * See IBetting Interface (raise function)
+     */
+    function raise(uint256 amount_)
+        external
+        override
+        onlyValidTeam(_teamBetted[msg.sender])
+        isApproved(amount_)
+        better
+        returns (bool success)
+    {
+        uint256 teamId = _teamBetted[msg.sender];
+        _token.transferFrom(msg.sender, address(this), amount_);
+        _teams[teamId].bets++;
+        _teams[teamId].tokens += amount_;
+        _totalBetted += amount_;
+        emit Raised(teamId);
         return true;
     }
 
@@ -119,6 +152,21 @@ contract Betting is IBetting, IBettingMetadata {
         return _teams[teamId_];
     }
 
+    /**
+     * See IBettingMetadata Interface (teamBetted function)
+     */
+    function teamBetted(address account_)
+        external
+        view
+        override
+        returns (uint256)
+    {
+        return _teamBetted[account_];
+    }
+
+    /**
+     * See IBettingMetadata Interface (bets function)
+     */
     function bets(uint256 teamId_)
         external
         view
