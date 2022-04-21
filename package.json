@@ -1,5 +1,11 @@
 {
-  "name": "hardhat-project",
+  "name": "betting-championship-smart-contract",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matheus N. Gomes",
+    "email": "matt-gomes@live.com"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
@@ -31,5 +37,8 @@
     "ts-node": "^10.7.0",
     "typechain": "^5.2.0",
     "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0"
   }
 }

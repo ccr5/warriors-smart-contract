@@ -1,46 +1,146 @@
-# Advanced Sample Hardhat Project
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+<br />
+<p align="center">
+  <a href="https://github.com/ccr5/betting-championship-smart-contract">
+    <img src="images/logo.png" alt="Logo" width="150">
+  </a>
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+  <h3 align="center">Betting Championship Smart Contract</h3>
 
-Try running some of the following tasks:
+  <p align="center">
+    Do you think will your favorite team win the 2022 - Brazilian Championship?
+    <br />
+    <a href="https://github.com/ccr5/betting-championship-smart-contract/tree/main/docs"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/ccr5/betting-championship-smart-contract/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/ccr5/betting-championship-smart-contract/issues">Request Feature</a>
+  </p>
+</p>
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
-```
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-# Etherscan verification
+## About The Project
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+This project is a part of my first dApp. The goal is develop a platform where it is possible 
+to bet using BET Tokens bought with ether on any team in the brazilian championship until the 
+tenth round and, at the end of the competition, if you win, you will receive all BET tokens.
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+To see the website, please go to [Betting Championship dApp](https://github.com/ccr5/betting-championship-dapp).
 
-```shell
-hardhat run --network ropsten scripts/deploy.ts
-```
+### Built With
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+* [Hardhat](https://hardhat.org/)
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
+## Getting Started
 
-# Performance optimizations
+To get a local copy up and running follow these simple example steps.
 
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+### Prerequisites
+
+* NodeJS
+* Hardhat
+* MetaMask
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/ccr5/betting-championship-smart-contract.git
+   ```
+2. Install packages
+   ```sh
+   yarn
+   ```
+3. Make migrations to create a local smart contract
+    ```sh
+    truffle migrate 
+    ```
+4. Start hardhat node server
+   ```sh
+   npx hardhat node
+   ```
+5. Run Betting deploy script
+   ```sh
+   npx hardhat run --network scripts/Betting-deploy.ts
+   ```
+
+## Usage
+
+
+<p align="center">
+  <a href="https://github.com/ccr5/betting-championship-smart-contract">
+    <img src="images/home.png" alt="Logo" width="100%">
+  </a>
+  with your metamask connected to the Hardhat network and an imported account 
+  (it cannot be the one running the contracts), choose your team and bet.
+</p>
+
+## Roadmap
+
+See the [open issues](https://github.com/ccr5/betting-championship-smart-contract/issues) for a list of proposed features (and known issues).
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Matheus Nobre Gomes - matt-gomes@live.com
+
+Project Link: [https://github.com/ccr5/betting-championship-smart-contract](https://github.com/ccr5/betting-championship-smart-contract)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
+[contributors-url]: https://github.com/ccr5/betting-championship-smart-contract/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
+[forks-url]: https://github.com/ccr5/betting-championship-smart-contract/network/members
+[stars-shield]: https://img.shields.io/github/stars/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
+[stars-url]: https://github.com/ccr5/betting-championship-smart-contract/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
+[issues-url]: https://github.com/ccr5/betting-championship-smart-contract/issues
+[license-shield]: https://img.shields.io/github/license/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
+[license-url]: https://github.com/ccr5/betting-championship-smart-contract/blob/main/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/mattnobre
+[product-screenshot]: images/home.png
