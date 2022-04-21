@@ -86,6 +86,21 @@ contract Betting is IBetting, IBettingMetadata {
         return true;
     }
 
+    receive() external payable {
+        uint256 amount = (msg.value / 10**18) * 2000;
+
+        require(msg.sender != _organizer, "msg.sender can't be organizer");
+        require(msg.sender != address(0), "msg.sender can't be zero address");
+        require(
+            _token.balanceOf(_organizer) >= amount,
+            "total of token is not enought"
+        );
+
+        _token.transferFrom(_organizer, msg.sender, amount);
+
+        emit TokensBought(msg.sender, amount);
+    }
+
     /**
      * See IBetting Interface (raise function)
      */

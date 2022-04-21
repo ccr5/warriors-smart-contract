@@ -11,6 +11,10 @@ interface IBetting {
     /// @param winner_ Id of a valid team
     event Ended(uint256 indexed winner_);
 
+    /// @param account_ Who bought tokens
+    /// @param amount_ how many tokens was bought
+    event TokensBought(address account_, uint256 amount_);
+
     /// @notice Bet in a team
     /// @dev teamId_ must to be a valid team. Emits Betted event
     /// @param teamId_ Id of a valid team
