@@ -1,8 +1,6 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const [owner] = await ethers.getSigners();
-
   const BettingToken = await ethers.getContractFactory("BettingToken");
   const bet = await BettingToken.deploy(1000000);
   console.log("BettingToken deployed to:", bet.address);
