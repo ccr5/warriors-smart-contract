@@ -177,9 +177,10 @@ describe("When Betting is deployed", function () {
 
     await bet.approve(instance.address, 1000000);
 
-    await instance
-      .connect(addr1)
-      .buy({ value: ethers.utils.parseEther("1.0") });
+    await addr1.sendTransaction({
+      value: ethers.utils.parseEther("1.0"),
+      to: instance.address,
+    });
 
     expect(await ethers.provider.getBalance(instance.address)).to.equal(
       ethers.utils.parseEther("1.0")
