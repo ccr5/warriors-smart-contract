@@ -24,11 +24,6 @@ interface IBetting {
         external
         returns (bool success);
 
-    /// @notice Buy BET tokens using Ethereum
-    /// @dev 1 ETH buys 2000 BET tokens. msg.sender can't be organizer or zero address. Emits TokensBought event
-    /// @return success boolean
-    function buy() external payable returns (bool success);
-
     /// @notice Raise a bet in a team
     /// @dev teamId_ must to be a valid team. msg.sender can't be a non better. Emits Raised event
     /// @param amount_ amount of tokens to bet

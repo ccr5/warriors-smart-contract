@@ -86,10 +86,7 @@ contract Betting is IBetting, IBettingMetadata {
         return true;
     }
 
-    /**
-     * See IBetting Interface (buy function)
-     */
-    function buy() external payable override returns (bool success) {
+    receive() external payable {
         uint256 amount = (msg.value / 10**18) * 2000;
 
         require(msg.sender != _organizer, "msg.sender can't be organizer");
@@ -102,8 +99,6 @@ contract Betting is IBetting, IBettingMetadata {
         _token.transferFrom(_organizer, msg.sender, amount);
 
         emit TokensBought(msg.sender, amount);
-
-        return true;
     }
 
     /**
