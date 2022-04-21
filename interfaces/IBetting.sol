@@ -11,6 +11,10 @@ interface IBetting {
     /// @param winner_ Id of a valid team
     event Ended(uint256 indexed winner_);
 
+    /// @param account_ Who bought tokens
+    /// @param amount_ how many tokens was bought
+    event TokensBought(address account_, uint256 amount_);
+
     /// @notice Bet in a team
     /// @dev teamId_ must to be a valid team. Emits Betted event
     /// @param teamId_ Id of a valid team
@@ -19,6 +23,11 @@ interface IBetting {
     function bet(uint256 teamId_, uint256 amount_)
         external
         returns (bool success);
+
+    /// @notice Buy BET tokens using Ethereum
+    /// @dev 1 ETH buys 2000 BET tokens. msg.sender can't be organizer or zero address. Emits TokensBought event
+    /// @return success boolean
+    function buy() external payable returns (bool success);
 
     /// @notice Raise a bet in a team
     /// @dev teamId_ must to be a valid team. msg.sender can't be a non better. Emits Raised event
