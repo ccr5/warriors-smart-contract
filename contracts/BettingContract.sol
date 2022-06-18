@@ -5,7 +5,6 @@ import "hardhat/console.sol";
 import {BettingToken} from "contracts/BettingToken.sol";
 import {IBetting} from "interfaces/IBetting.sol";
 import {IBettingMetadata, Team} from "interfaces/IBettingMetadata.sol";
-
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Betting is IBetting, IBettingMetadata {
@@ -55,10 +54,11 @@ contract Betting is IBetting, IBettingMetadata {
     }
 
     constructor(BettingToken token_, uint256 endBlock_) {
-        addTeam("Sao Paulo");
-        addTeam("Corinthians");
-        addTeam("Santos");
-        addTeam("Palmeiras");
+        addTeam("Khnum Amon");
+        addTeam("Yamanu Amun");
+        addTeam("Amun Osiris");
+        addTeam("Khnum Serapis");
+        addTeam("Atem Ptah");
         _organizer = msg.sender;
         _token = token_;
         _endBlock = block.number + endBlock_;
