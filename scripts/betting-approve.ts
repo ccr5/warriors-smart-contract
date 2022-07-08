@@ -14,7 +14,9 @@ async function main() {
   );
 
   const bet = await BettingToken._deployed();
-  await bet.approve(bettingAddress, 1000000);
+  const tx = await bet.approve(bettingAddress, 1000000);
+  console.log(tx);
+  tx.wait();
   console.log("Approve Ok");
 }
 
