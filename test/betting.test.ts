@@ -166,15 +166,15 @@ describe("When Betting is deployed", function () {
     await bet.approve(instance.address, 1000000);
 
     await addr1.sendTransaction({
-      value: ethers.utils.parseEther("1.0"),
+      value: ethers.utils.parseEther("0.003"),
       to: instance.address,
     });
 
     expect(await ethers.provider.getBalance(instance.address)).to.equal(
-      ethers.utils.parseEther("1.0")
+      ethers.utils.parseEther("0.003")
     );
 
-    expect(await bet.balanceOf(addr1.address)).to.equal(2000);
+    expect(await bet.balanceOf(addr1.address)).to.equal(6);
   });
 
   it("emits a Betted event", async () => {

@@ -48,8 +48,13 @@ contract Betting is IBetting, IBettingMetadata {
         _;
     }
 
+    modifier finished() {
+        require(block.number > _endBlock, "Time not over yet");
+        _;
+    }
+
     modifier notFinished() {
-        require(block.number <= _endBlock, "Time not over yet");
+        require(block.number <= _endBlock, "Time over");
         _;
     }
 
@@ -84,8 +89,9 @@ contract Betting is IBetting, IBettingMetadata {
     }
 
     receive() external payable {
-        uint256 amount = (msg.value / 10**18) * 2000;
+        uint256 amount = (msg.value / 10**15) * 2;
 
+        require(msg.value >= 1000000000000000, "minimum value is 0,001 ETH");
         require(msg.sender != _organizer, "msg.sender can't be organizer");
         require(msg.sender != address(0), "msg.sender can't be zero address");
         require(
@@ -126,10 +132,9 @@ contract Betting is IBetting, IBettingMetadata {
         override
         onlyValidTeam(winner_)
         onlyOrganizer
+        finished
         returns (bool success)
     {
-        require(block.number > _endBlock, "Time not over yet");
-
         uint256 fracAmount = _totalBetted / _teams[winner_].bets;
 
         for (uint256 index = 0; index < _bets[winner_].length; index++) {
