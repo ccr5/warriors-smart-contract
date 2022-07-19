@@ -1,8 +1,8 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const endBlock = 2022;
-  const betAddress = "0x07F0CbE8eBe58eFfA359bF3f54cAF0FFC81e5C9E"; // insert here the Betting Token Address
+  const endBlock = 4204800;
+  const betAddress = "0x69CEB93569F97c6d466F8B7Be0f234930ecDb8C2"; // insert here the Betting Token Address
   const Betting = await ethers.getContractFactory("Betting");
   const betting = await Betting.deploy(betAddress, endBlock);
   await betting._deployed();

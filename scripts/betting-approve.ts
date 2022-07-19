@@ -2,9 +2,9 @@ import { ethers } from "hardhat";
 
 async function main() {
   // insert here the Betting Token Address
-  const betAddress = "0x07F0CbE8eBe58eFfA359bF3f54cAF0FFC81e5C9E";
+  const betAddress = "0x69CEB93569F97c6d466F8B7Be0f234930ecDb8C2";
   // insert here the Betting Address
-  const bettingAddress = "0xF87b0d13a6EfB058A91808b7217f9b86E4308165";
+  const bettingAddress = "0x07F0CbE8eBe58eFfA359bF3f54cAF0FFC81e5C9E";
   const signer = ethers.provider.getSigner();
 
   const BettingToken = await ethers.getContractAt(
