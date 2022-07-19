@@ -56,9 +56,6 @@ contract Betting is IBetting, IBettingMetadata {
     constructor(BettingToken token_, uint256 endBlock_) {
         addTeam("Khnum Amon");
         addTeam("Yamanu Amun");
-        addTeam("Amun Osiris");
-        addTeam("Khnum Serapis");
-        addTeam("Atem Ptah");
         _organizer = msg.sender;
         _token = token_;
         _endBlock = block.number + endBlock_;
