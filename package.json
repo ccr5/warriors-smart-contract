@@ -5,7 +5,7 @@
     "name": "Matheus N. Gomes",
     "email": "matt-gomes@live.com"
   },
-  "license": "MIT",
+  "license": "GPLv3",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
