@@ -11,7 +11,7 @@ describe("When Betting is deployed", function () {
     const Betting = await ethers.getContractFactory("Betting");
     const betting = await Betting.deploy(betAddress, endBlock);
     const instance = await betting._deployed();
-    expect(await instance.teamsCount()).to.equal(5);
+    expect(await instance.teamsCount()).to.equal(2);
   });
 
   it("initialize the teams with the correct values", async () => {
@@ -26,9 +26,6 @@ describe("When Betting is deployed", function () {
 
     const firstTeam = await instance.teams(1);
     const secondTeam = await instance.teams(2);
-    const thirdTeam = await instance.teams(3);
-    const fourthTeam = await instance.teams(4);
-    const fifthTeam = await instance.teams(5);
 
     // 1º team
     expect(await firstTeam.id).to.equal(1);
@@ -39,21 +36,6 @@ describe("When Betting is deployed", function () {
     expect(await secondTeam.id).to.equal(2);
     expect(await secondTeam.name).to.equal("Yamanu Amun");
     expect(await secondTeam.bets).to.equal(0);
-
-    // 3º team
-    expect(await thirdTeam.id).to.equal(3);
-    expect(await thirdTeam.name).to.equal("Amun Osiris");
-    expect(await thirdTeam.bets).to.equal(0);
-
-    // 4º team
-    expect(await fourthTeam.id).to.equal(4);
-    expect(await fourthTeam.name).to.equal("Khnum Serapis");
-    expect(await fourthTeam.bets).to.equal(0);
-
-    // 5º team
-    expect(await fifthTeam.id).to.equal(5);
-    expect(await fifthTeam.name).to.equal("Atem Ptah");
-    expect(await fifthTeam.bets).to.equal(0);
   });
 
   it("initialize with an end block", async () => {
@@ -184,15 +166,15 @@ describe("When Betting is deployed", function () {
     await bet.approve(instance.address, 1000000);
 
     await addr1.sendTransaction({
-      value: ethers.utils.parseEther("1.0"),
+      value: ethers.utils.parseEther("0.003"),
       to: instance.address,
     });
 
     expect(await ethers.provider.getBalance(instance.address)).to.equal(
-      ethers.utils.parseEther("1.0")
+      ethers.utils.parseEther("0.003")
     );
 
-    expect(await bet.balanceOf(addr1.address)).to.equal(2000);
+    expect(await bet.balanceOf(addr1.address)).to.equal(6);
   });
 
   it("emits a Betted event", async () => {
