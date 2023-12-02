@@ -7,21 +7,20 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/ccr5/betting-championship-smart-contract">
+  <a href="https://github.com/ccr5/warriors-smart-contract">
     <img src="images/logo.png" alt="Logo" width="150">
   </a>
 
-  <h3 align="center">Betting Championship Smart Contract</h3>
+  <h3 align="center">Warriors Smart Contract</h3>
 
   <p align="center">
-    Do you think will your favorite team win the 2022 - Brazilian Championship?
     <br />
-    <a href="https://github.com/ccr5/betting-championship-smart-contract/tree/main/docs"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ccr5/warriors-smart-contract/tree/main/docs"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ccr5/betting-championship-smart-contract/issues">Report Bug</a>
+    <a href="https://github.com/ccr5/warriors-smart-contract/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ccr5/betting-championship-smart-contract/issues">Request Feature</a>
+    <a href="https://github.com/ccr5/warriors-smart-contract/issues">Request Feature</a>
   </p>
 </p>
 
@@ -51,11 +50,6 @@
 
 ## About The Project
 
-This project is a part of my first dApp. The goal is develop a platform where it is possible 
-to bet using BET Tokens bought with ether on any team in the brazilian championship until the 
-tenth round and, at the end of the competition, if you win, you will receive all BET tokens.
-
-To see the website, please go to [Betting Championship dApp](https://github.com/ccr5/betting-championship-dapp).
 
 ### Built With
 
@@ -71,34 +65,11 @@ To get a local copy up and running follow these simple example steps.
 * Hardhat
 * MetaMask
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/ccr5/betting-championship-smart-contract.git
-   ```
-2. Install packages
-   ```sh
-   yarn
-   ```
-3. Make migrations to create a local smart contract
-    ```sh
-    truffle migrate 
-    ```
-4. Start hardhat node server
-   ```sh
-   npx hardhat node
-   ```
-5. Run Betting deploy script
-   ```sh
-   npx hardhat run --network scripts/Betting-deploy.ts
-   ```
-
 ## Usage
 
 
 <p align="center">
-  <a href="https://github.com/ccr5/betting-championship-smart-contract">
+  <a href="https://github.com/ccr5/warriors-smart-contract">
     <img src="images/home.png" alt="Logo" width="100%">
   </a>
   with your metamask connected to the Hardhat network and an imported account 
@@ -107,7 +78,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Roadmap
 
-See the [open issues](https://github.com/ccr5/betting-championship-smart-contract/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/ccr5/warriors-smart-contract/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -121,26 +92,26 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GPLv3 License. See `LICENSE` for more information.
 
 ## Contact
 
 Matheus Nobre Gomes - matt-gomes@live.com
 
-Project Link: [https://github.com/ccr5/betting-championship-smart-contract](https://github.com/ccr5/betting-championship-smart-contract)
+Project Link: [https://github.com/ccr5/warriors-smart-contract](https://github.com/ccr5/warriors-smart-contract)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
-[contributors-url]: https://github.com/ccr5/betting-championship-smart-contract/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
-[forks-url]: https://github.com/ccr5/betting-championship-smart-contract/network/members
-[stars-shield]: https://img.shields.io/github/stars/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
-[stars-url]: https://github.com/ccr5/betting-championship-smart-contract/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
-[issues-url]: https://github.com/ccr5/betting-championship-smart-contract/issues
-[license-shield]: https://img.shields.io/github/license/ccr5/betting-championship-smart-contract.svg?style=for-the-badge
-[license-url]: https://github.com/ccr5/betting-championship-smart-contract/blob/main/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/ccr5/warriors-smart-contract.svg?style=for-the-badge
+[contributors-url]: https://github.com/ccr5/warriors-smart-contract/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ccr5/warriors-smart-contract.svg?style=for-the-badge
+[forks-url]: https://github.com/ccr5/warriors-smart-contract/network/members
+[stars-shield]: https://img.shields.io/github/stars/ccr5/warriors-smart-contract.svg?style=for-the-badge
+[stars-url]: https://github.com/ccr5/warriors-smart-contract/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ccr5/warriors-smart-contract.svg?style=for-the-badge
+[issues-url]: https://github.com/ccr5/warriors-smart-contract/issues
+[license-shield]: https://img.shields.io/github/license/ccr5/warriors-smart-contract.svg?style=for-the-badge
+[license-url]: https://github.com/ccr5/warriors-smart-contract/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mattnobre
 [product-screenshot]: images/home.png
